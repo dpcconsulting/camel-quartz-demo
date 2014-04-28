@@ -10,8 +10,6 @@
         <property name="say" value="Hi from Camel"/>
     </bean>
     <bean id="scheduling" class="hu.dpc.osgi.Scheduling"></bean>
-    <bean id="setter" class="hu.dpc.osgi.Setter"></bean>
-
 
     <camelContext id="blueprintContext" trace="false" xmlns="http://camel.apache.org/schema/blueprint">
         <route id="timerToLog">
@@ -28,15 +26,6 @@
             <from uri="direct:schedule"/>
             <log message="Scheduling message ${body}"/>
             <bean ref="scheduling" method="schedule"/>
-            <to uri="mock:result"/>
-        </route>
-
-        <route id="setter-example">
-            <from uri="direct:schedule"/>
-            <bean ref="setter" method="demodata"/>
-            <setProperty propertyName="test">
-                <simple>asd</simple>
-            </setProperty>
             <to uri="mock:result"/>
         </route>
 
